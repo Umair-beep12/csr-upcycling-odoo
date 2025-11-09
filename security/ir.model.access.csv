@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_csr_upcycle_request_user,access.csr.upcycle.request.user,model_csr_upcycle_request,csr_upcycling.group_csr_user,1,1,1,0
+access_csr_upcycle_request_manager,access.csr.upcycle.request.manager,model_csr_upcycle_request,csr_upcycling.group_csr_manager,1,1,1,1
+access_csr_upcycle_request_internal,access.csr.upcycle.request.internal,model_csr_upcycle_request,base.group_user,1,1,1,0
+access_csr_reward_user,access.csr.reward.user,model_csr_employee_reward,base.group_user,1,1,1,0
+access_csr_dashboard_user,access.csr.dashboard.user,model_csr_upcycling_dashboard,base.group_user,1,0,0,0

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_product_template_tree_csr_upcycling" model="ir.ui.view">
+            <field name="name">product.template.csr.upcycling.tree</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list" position="attributes">
+                    <attribute name="default_order">name asc</attribute>
+                </xpath>
+                <xpath expr="//list/field[@name='list_price']" position="after">
+                    <field name="upcyclable"/>
+                    <field name="co2e_per_unit"/>
+                    <field name="cost_per_unit"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_product_template_form_csr_upcycling" model="ir.ui.view">
+            <field name="name">product.template.csr.upcycling.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="action_view_upcycle_requests" type="object" class="oe_stat_button" icon="fa-recycle">
+                        <field name="upcycle_request_count" widget="statinfo" string="Upcycle Requests"/>
+                    </button>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <group string="CSR Upcycling">
+                        <field name="upcyclable"/>
+                        <field name="co2e_per_unit"/>
+                        <field name="cost_per_unit"/>
+                        <field name="upcycle_last_request_date"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

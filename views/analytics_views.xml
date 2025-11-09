@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Dashboard kanban view -->
+        <record id="view_csr_upcycling_dashboard_kanban" model="ir.ui.view">
+            <field name="name">csr.upcycling.dashboard.kanban</field>
+            <field name="model">csr.upcycling.dashboard</field>
+            <field name="arch" type="xml">
+                <kanban class="o_csr_dashboard" create="0">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="total_co2e"/>
+                    <field name="total_aed"/>
+                    <field name="total_ceits"/>
+                    <field name="overall_co2e"/>
+                    <field name="overall_aed"/>
+                    <field name="overall_ceits"/>
+                    <field name="co2e_share"/>
+                    <field name="aed_share"/>
+                    <field name="ceits_share"/>
+                    <field name="is_total"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="card shadow-sm mb-2" t-attf-class="#{record.is_total.raw_value and 'bg-primary text-white' or ''}">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h4 class="mb-1" t-esc="record.name.value"/>
+                                        <span class="badge bg-info" t-if="record.department_id.value">
+                                            <t t-esc="record.department_id.value"/>
+                                        </span>
+                                    </div>
+                                    <div class="mt-3">
+                                        <t t-set="co2e_share" t-value="record.co2e_share.raw_value or 0.0"/>
+                                        <div class="fw-bold"><i class="fa fa-leaf text-success me-1"/>CO₂e Avoided: <t t-esc="record.total_co2e.value"/> kg</div>
+                                        <div class="progress mb-2 mt-1">
+                                            <div class="progress-bar bg-success"
+                                                 t-att-style="'width:%s%%' % co2e_share"/>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <t t-set="aed_share" t-value="record.aed_share.raw_value or 0.0"/>
+                                        <div class="fw-bold"><i class="fa fa-coins text-warning me-1"/>AED Saved: <t t-esc="record.total_aed.value"/></div>
+                                        <div class="progress mb-2 mt-1">
+                                            <div class="progress-bar bg-warning"
+                                                 t-att-style="'width:%s%%' % aed_share"/>
+                                        </div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <t t-set="ceit_share" t-value="record.ceits_share.raw_value or 0.0"/>
+                                        <div class="fw-bold"><i class="fa fa-star text-primary me-1"/>CEITs Awarded: <t t-esc="record.total_ceits.value"/></div>
+                                        <div class="progress mb-1 mt-1">
+                                            <div class="progress-bar bg-primary"
+                                                 t-att-style="'width:%s%%' % ceit_share"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_csr_dashboard" model="ir.actions.act_window">
+            <field name="name">CSR Dashboard</field>
+            <field name="res_model">csr.upcycling.dashboard</field>
+            <field name="view_mode">kanban</field>
+            <field name="target">current</field>
+        </record>
+
+        <!-- Department impact views -->
+        <record id="view_hr_department_tree_impact" model="ir.ui.view">
+            <field name="name">hr.department.impact.list</field>
+            <field name="model">hr.department</field>
+            <field name="arch" type="xml">
+                <list string="Department Impact" default_order="upcycle_total_ceits desc">
+                    <field name="upcycle_rank"/>
+                    <field name="name"/>
+                    <field name="upcycle_total_co2e"/>
+                    <field name="upcycle_total_aed"/>
+                    <field name="upcycle_total_ceits"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_hr_department_graph_impact" model="ir.ui.view">
+            <field name="name">hr.department.impact.graph</field>
+            <field name="model">hr.department</field>
+            <field name="arch" type="xml">
+                <graph string="Department CEITs" type="bar">
+                    <field name="upcycle_total_ceits" type="measure"/>
+                    <field name="name" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_hr_department_pivot_impact" model="ir.ui.view">
+            <field name="name">hr.department.impact.pivot</field>
+            <field name="model">hr.department</field>
+            <field name="arch" type="xml">
+                <pivot string="Department Impact">
+                    <field name="upcycle_total_co2e" type="measure"/>
+                    <field name="upcycle_total_aed" type="measure"/>
+                    <field name="upcycle_total_ceits" type="measure"/>
+                    <field name="name" type="row"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_csr_department_impact" model="ir.actions.act_window">
+            <field name="name">Department Impact</field>
+            <field name="res_model">hr.department</field>
+            <field name="view_mode">list,graph,pivot</field>
+            <field name="view_id" ref="view_hr_department_tree_impact"/>
+            <field name="context">{'search_default_group_by':'', 'default_filter_upcycling': 1}</field>
+        </record>
+
+        <!-- Reward views -->
+        <record id="view_csr_employee_reward_tree" model="ir.ui.view">
+            <field name="name">csr.employee.reward.tree</field>
+            <field name="model">csr.employee.reward</field>
+            <field name="arch" type="xml">
+                <list string="CSR Rewards">
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="points"/>
+                    <field name="reason"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_csr_employee_reward_form" model="ir.ui.view">
+            <field name="name">csr.employee.reward.form</field>
+            <field name="model">csr.employee.reward</field>
+            <field name="arch" type="xml">
+                <form string="CSR Reward">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="user_id"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="points"/>
+                            <field name="request_id"/>
+                        </group>
+                        <field name="reason" colspan="2"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Res users form inherit -->
+        <record id="view_users_form_csr_rewards" model="ir.ui.view">
+            <field name="name">res.users.csr.rewards</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="action_view_csr_rewards" type="object" class="oe_stat_button" icon="fa-trophy">
+                        <field name="csr_reward_count" widget="statinfo" string="CSR Rewards"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Departments -->
+        <record id="demo_department_circular_lab" model="hr.department">
+            <field name="name">Circular Lab</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="demo_department_green_ops" model="hr.department">
+            <field name="name">Green Operations</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="demo_department_design_studio" model="hr.department">
+            <field name="name">Design Studio</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="demo_department_outreach" model="hr.department">
+            <field name="name">Community Outreach</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+        <record id="demo_department_sustainability_office" model="hr.department">
+            <field name="name">Sustainability Office</field>
+            <field name="company_id" ref="base.main_company"/>
+        </record>
+
+        <!-- Category for demo products -->
+        <record id="csr_product_category" model="product.category">
+            <field name="name">CSR Upcycling Supplies</field>
+            <field name="parent_id" eval="False"/>
+        </record>
+
+        <!-- Upcyclable Products -->
+        <record id="demo_product_retired_laptop" model="product.template">
+            <field name="name">Retired Laptop Bundle</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">12.5</field>
+            <field name="cost_per_unit">185</field>
+        </record>
+
+        <record id="demo_product_oak_desks" model="product.template">
+            <field name="name">Oak Desk Offcuts</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">8.2</field>
+            <field name="cost_per_unit">95</field>
+        </record>
+
+        <record id="demo_product_glass_bottles" model="product.template">
+            <field name="name">Glass Bottle Batch</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">2.4</field>
+            <field name="cost_per_unit">18</field>
+        </record>
+        <record id="demo_product_textile_scraps" model="product.template">
+            <field name="name">Textile Scraps Bundle</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">5.7</field>
+            <field name="cost_per_unit">42</field>
+        </record>
+        <record id="demo_product_plastic_pallets" model="product.template">
+            <field name="name">Plastic Pallets</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">3.1</field>
+            <field name="cost_per_unit">26</field>
+        </record>
+        <record id="demo_product_reclaimed_steel" model="product.template">
+            <field name="name">Reclaimed Steel Frames</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">14.8</field>
+            <field name="cost_per_unit">210</field>
+        </record>
+        <record id="demo_product_solar_panels" model="product.template">
+            <field name="name">Retired Solar Panels</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">19.2</field>
+            <field name="cost_per_unit">320</field>
+        </record>
+        <record id="demo_product_packaging_foam" model="product.template">
+            <field name="name">Packaging Foam Blocks</field>
+            <field name="type">consu</field>
+            <field name="categ_id" ref="csr_upcycling.csr_product_category"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="list_price">0.0</field>
+            <field name="standard_price">0.0</field>
+            <field name="upcyclable">1</field>
+            <field name="co2e_per_unit">1.9</field>
+            <field name="cost_per_unit">12</field>
+        </record>
+
+        <!-- Demo Requests -->
+        <record id="demo_request_laptops" model="csr.upcycle.request">
+            <field name="name">Campus Laptop Reuse Drive</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_retired_laptop"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_circular_lab"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">18</field>
+            <field name="request_date">2024-07-01</field>
+            <field name="product_co2e_per_unit">12.5</field>
+            <field name="product_cost_per_unit">185</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-07-02 09:30:00</field>
+            <field name="done_date">2024-07-05 14:15:00</field>
+        </record>
+
+        <record id="demo_request_desks" model="csr.upcycle.request">
+            <field name="name">Executive Desk Art Pieces</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_oak_desks"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_green_ops"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">32</field>
+            <field name="request_date">2024-08-12</field>
+            <field name="product_co2e_per_unit">8.2</field>
+            <field name="product_cost_per_unit">95</field>
+            <field name="state">rejected</field>
+            <field name="approval_date">2024-08-13 10:10:00</field>
+        </record>
+
+        <record id="demo_request_glassware" model="csr.upcycle.request">
+            <field name="name">Glassware for Eco Events</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_glass_bottles"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_circular_lab"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">120</field>
+            <field name="request_date">2024-09-05</field>
+            <field name="product_co2e_per_unit">2.4</field>
+            <field name="product_cost_per_unit">18</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-09-06 08:00:00</field>
+            <field name="done_date">2024-09-10 11:45:00</field>
+        </record>
+
+        <record id="demo_request_textiles" model="csr.upcycle.request">
+            <field name="name">Textile Tote Program</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_textile_scraps"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_design_studio"/>
+            <field name="requested_by_id" ref="base.user_demo"/>
+            <field name="quantity">65</field>
+            <field name="request_date">2024-10-14</field>
+            <field name="product_co2e_per_unit">5.7</field>
+            <field name="product_cost_per_unit">42</field>
+            <field name="state">approved</field>
+            <field name="approval_date">2024-10-15 13:00:00</field>
+        </record>
+
+        <record id="demo_request_plastics" model="csr.upcycle.request">
+            <field name="name">Outdoor Furniture Hackathon</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_plastic_pallets"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_green_ops"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">80</field>
+            <field name="request_date">2024-11-02</field>
+            <field name="product_co2e_per_unit">3.1</field>
+            <field name="product_cost_per_unit">26</field>
+            <field name="state">submitted</field>
+        </record>
+
+        <record id="demo_request_steel" model="csr.upcycle.request">
+            <field name="name">Reclaimed Steel Art Installation</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_reclaimed_steel"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_outreach"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">24</field>
+            <field name="request_date">2024-07-20</field>
+            <field name="product_co2e_per_unit">14.8</field>
+            <field name="product_cost_per_unit">210</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-07-21 11:00:00</field>
+            <field name="done_date">2024-08-02 16:40:00</field>
+        </record>
+        <record id="demo_request_solar" model="csr.upcycle.request">
+            <field name="name">Solar Patio Refurb</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_solar_panels"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_sustainability_office"/>
+            <field name="requested_by_id" ref="base.user_demo"/>
+            <field name="quantity">12</field>
+            <field name="request_date">2024-11-18</field>
+            <field name="product_co2e_per_unit">19.2</field>
+            <field name="product_cost_per_unit">320</field>
+            <field name="state">approved</field>
+            <field name="approval_date">2024-11-19 15:20:00</field>
+        </record>
+        <record id="demo_request_packaging" model="csr.upcycle.request">
+            <field name="name">Foam Acoustic Panels</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_packaging_foam"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_design_studio"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">150</field>
+            <field name="request_date">2024-06-30</field>
+            <field name="product_co2e_per_unit">1.9</field>
+            <field name="product_cost_per_unit">12</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-07-01 09:45:00</field>
+            <field name="done_date">2024-07-08 10:10:00</field>
+        </record>
+
+        <!-- Additional demo requests -->
+        <record id="demo_request_laptop_training" model="csr.upcycle.request">
+            <field name="name">Laptop Training Lab</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_retired_laptop"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_sustainability_office"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">22</field>
+            <field name="request_date">2024-05-15</field>
+            <field name="product_co2e_per_unit">12.5</field>
+            <field name="product_cost_per_unit">185</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-05-16 09:00:00</field>
+            <field name="done_date">2024-05-20 15:30:00</field>
+        </record>
+
+        <record id="demo_request_textile_merch" model="csr.upcycle.request">
+            <field name="name">Textile Merch Capsule</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_textile_scraps"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_design_studio"/>
+            <field name="requested_by_id" ref="base.user_demo"/>
+            <field name="quantity">40</field>
+            <field name="request_date">2024-10-01</field>
+            <field name="product_co2e_per_unit">5.7</field>
+            <field name="product_cost_per_unit">42</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-10-03 10:00:00</field>
+            <field name="done_date">2024-10-12 12:00:00</field>
+        </record>
+
+        <record id="demo_request_glass_outreach" model="csr.upcycle.request">
+            <field name="name">Outreach Glass Kits</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_glass_bottles"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_outreach"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">85</field>
+            <field name="request_date">2024-08-26</field>
+            <field name="product_co2e_per_unit">2.4</field>
+            <field name="product_cost_per_unit">18</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-08-27 08:00:00</field>
+            <field name="done_date">2024-09-03 17:00:00</field>
+        </record>
+
+        <record id="demo_request_plastic_gardenkits" model="csr.upcycle.request">
+            <field name="name">Plastic Garden Kits</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_plastic_pallets"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_green_ops"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">55</field>
+            <field name="request_date">2024-11-05</field>
+            <field name="product_co2e_per_unit">3.1</field>
+            <field name="product_cost_per_unit">26</field>
+            <field name="state">approved</field>
+            <field name="approval_date">2024-11-06 14:00:00</field>
+        </record>
+
+        <record id="demo_request_foam_popups" model="csr.upcycle.request">
+            <field name="name">Foam Popup Booth</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_packaging_foam"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_circular_lab"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">95</field>
+            <field name="request_date">2024-09-18</field>
+            <field name="product_co2e_per_unit">1.9</field>
+            <field name="product_cost_per_unit">12</field>
+            <field name="state">approved</field>
+            <field name="approval_date">2024-09-19 11:45:00</field>
+        </record>
+
+        <record id="demo_request_solar_lab" model="csr.upcycle.request">
+            <field name="name">Solar Lab Demo</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_solar_panels"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_design_studio"/>
+            <field name="requested_by_id" ref="base.user_demo"/>
+            <field name="quantity">8</field>
+            <field name="request_date">2024-11-24</field>
+            <field name="product_co2e_per_unit">19.2</field>
+            <field name="product_cost_per_unit">320</field>
+            <field name="state">submitted</field>
+        </record>
+
+        <record id="demo_request_steel_infra" model="csr.upcycle.request">
+            <field name="name">Steel Infra Repairs</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_reclaimed_steel"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_sustainability_office"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">30</field>
+            <field name="request_date">2024-03-09</field>
+            <field name="product_co2e_per_unit">14.8</field>
+            <field name="product_cost_per_unit">210</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-03-10 10:30:00</field>
+            <field name="done_date">2024-03-20 18:30:00</field>
+        </record>
+
+        <record id="demo_request_desks_museum" model="csr.upcycle.request">
+            <field name="name">Museum Desk Exhibit</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_oak_desks"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_outreach"/>
+            <field name="requested_by_id" ref="base.user_demo"/>
+            <field name="quantity">18</field>
+            <field name="request_date">2024-02-15</field>
+            <field name="product_co2e_per_unit">8.2</field>
+            <field name="product_cost_per_unit">95</field>
+            <field name="state">approved</field>
+            <field name="approval_date">2024-02-16 09:30:00</field>
+        </record>
+
+        <record id="demo_request_textile_uniforms" model="csr.upcycle.request">
+            <field name="name">Textile Uniform Trial</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_textile_scraps"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_green_ops"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">70</field>
+            <field name="request_date">2024-12-01</field>
+            <field name="product_co2e_per_unit">5.7</field>
+            <field name="product_cost_per_unit">42</field>
+            <field name="state">submitted</field>
+        </record>
+
+        <record id="demo_request_glass_market" model="csr.upcycle.request">
+            <field name="name">Glass Market Stalls</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_glass_bottles"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_sustainability_office"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">140</field>
+            <field name="request_date">2024-04-11</field>
+            <field name="product_co2e_per_unit">2.4</field>
+            <field name="product_cost_per_unit">18</field>
+            <field name="state">done</field>
+            <field name="approval_date">2024-04-12 08:00:00</field>
+            <field name="done_date">2024-04-20 13:15:00</field>
+        </record>
+
+        <!-- Rejected scenarios -->
+        <record id="demo_request_rejected_laptops" model="csr.upcycle.request">
+            <field name="name">Laptop Art Installation</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_retired_laptop"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_design_studio"/>
+            <field name="requested_by_id" ref="base.user_demo"/>
+            <field name="quantity">15</field>
+            <field name="request_date">2024-03-05</field>
+            <field name="product_co2e_per_unit">12.5</field>
+            <field name="product_cost_per_unit">185</field>
+            <field name="state">rejected</field>
+            <field name="approval_date">2024-03-06 09:20:00</field>
+        </record>
+
+        <record id="demo_request_rejected_foam" model="csr.upcycle.request">
+            <field name="name">Foam Playground Structure</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_packaging_foam"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_outreach"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">60</field>
+            <field name="request_date">2024-06-09</field>
+            <field name="product_co2e_per_unit">1.9</field>
+            <field name="product_cost_per_unit">12</field>
+            <field name="state">rejected</field>
+            <field name="approval_date">2024-06-10 10:10:00</field>
+        </record>
+
+        <record id="demo_request_rejected_plastic" model="csr.upcycle.request">
+            <field name="name">Plastic Sculpture Pitch</field>
+            <field name="product_id" ref="csr_upcycling.demo_product_plastic_pallets"/>
+            <field name="department_id" ref="csr_upcycling.demo_department_sustainability_office"/>
+            <field name="requested_by_id" ref="base.user_admin"/>
+            <field name="quantity">35</field>
+            <field name="request_date">2024-08-01</field>
+            <field name="product_co2e_per_unit">3.1</field>
+            <field name="product_cost_per_unit">26</field>
+            <field name="state">rejected</field>
+            <field name="approval_date">2024-08-02 12:00:00</field>
+        </record>
+
+        <!-- Demo rewards -->
+        <record id="demo_reward_laptops" model="csr.employee.reward">
+            <field name="name">Laptop Drive Impact Bonus</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">45</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_laptops"/>
+            <field name="reason">Recognition for closing the campus laptop reuse drive.</field>
+            <field name="date">2024-07-05</field>
+        </record>
+        <record id="demo_reward_glassware" model="csr.employee.reward">
+            <field name="name">Eco Events Champion</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">75</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_glassware"/>
+            <field name="reason">Glassware initiative saved major event costs.</field>
+            <field name="date">2024-09-10</field>
+        </record>
+        <record id="demo_reward_steel" model="csr.employee.reward">
+            <field name="name">Community Steel Installation</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">60</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_steel"/>
+            <field name="reason">Art installation boosted outreach credibility.</field>
+            <field name="date">2024-08-05</field>
+        </record>
+        <record id="demo_reward_packaging" model="csr.employee.reward">
+            <field name="name">Sound Lab Foam Win</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">30</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_packaging"/>
+            <field name="reason">Foam reuse solved meeting-room acoustics.</field>
+            <field name="date">2024-07-08</field>
+        </record>
+        <record id="demo_reward_laptop_training" model="csr.employee.reward">
+            <field name="name">Laptop Training Lab</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">35</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_laptop_training"/>
+            <field name="reason">Enabled inclusive digital workshops.</field>
+            <field name="date">2024-05-20</field>
+        </record>
+        <record id="demo_reward_glass_outreach" model="csr.employee.reward">
+            <field name="name">Glass Outreach Kit</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">50</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_glass_outreach"/>
+            <field name="reason">Community events gained durable kits.</field>
+            <field name="date">2024-09-03</field>
+        </record>
+        <record id="demo_reward_textile_merch" model="csr.employee.reward">
+            <field name="name">Textile Merch Drop</field>
+            <field name="user_id" ref="base.user_demo"/>
+            <field name="points">28</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_textile_merch"/>
+            <field name="reason">Merchandise launch highlighted reuse story.</field>
+            <field name="date">2024-10-12</field>
+        </record>
+        <record id="demo_reward_glass_market" model="csr.employee.reward">
+            <field name="name">Glass Market Stalls</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="points">70</field>
+            <field name="request_id" ref="csr_upcycling.demo_request_glass_market"/>
+            <field name="reason">Helped equip seasonal farmer markets sustainably.</field>
+            <field name="date">2024-04-20</field>
+        </record>
+    </data>
+</odoo>

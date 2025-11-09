@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_csr_upcycle_request_list" model="ir.ui.view">
+            <field name="name">csr.upcycle.request.list</field>
+            <field name="model">csr.upcycle.request</field>
+            <field name="arch" type="xml">
+                <list string="Upcycle Requests" default_order="request_date desc"
+                      decoration-success="state == 'done'"
+                      decoration-info="state == 'approved'"
+                      decoration-danger="state == 'rejected'">
+                    <field name="name"/>
+                    <field name="request_date"/>
+                    <field name="product_id"/>
+                    <field name="department_id"/>
+                    <field name="requested_by_id"/>
+                    <field name="quantity"/>
+                    <field name="state" decoration-success="state == 'done'" decoration-info="state == 'approved'" decoration-danger="state == 'rejected'"/>
+                    <field name="co2e_avoided"/>
+                    <field name="aed_saved"/>
+                    <field name="ceits_awarded"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_csr_upcycle_request_form" model="ir.ui.view">
+            <field name="name">csr.upcycle.request.form</field>
+            <field name="model">csr.upcycle.request</field>
+            <field name="arch" type="xml">
+                <form string="Upcycle Request">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_related_product" type="object" class="oe_stat_button" icon="fa-cube"
+                                    invisible="product_id == False">
+                                <field name="product_id" widget="statinfo" string="View Product"/>
+                            </button>
+                            <button name="action_view_related_department" type="object" class="oe_stat_button" icon="fa-building"
+                                    invisible="department_id == False">
+                                <field name="department_id" widget="statinfo" string="View Department"/>
+                            </button>
+                        </div>
+                        <header>
+                            <button name="action_submit" type="object" string="Submit" class="oe_highlight"
+                                    invisible="state != 'draft'"/>
+                            <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                                    invisible="state != 'submitted'" groups="csr_upcycling.group_csr_manager"/>
+                            <button name="action_mark_done" type="object" string="Mark Done" class="btn-primary"
+                                    invisible="state != 'approved'" groups="csr_upcycling.group_csr_manager"/>
+                            <button name="action_reject" type="object" string="Reject"
+                                    invisible="state not in ['submitted', 'approved']" groups="csr_upcycling.group_csr_manager"/>
+                            <button name="action_reset_to_draft" type="object" string="Reset to Draft"
+                                    invisible="state != 'rejected'"/>
+                            <field name="state" widget="statusbar" statusbar_visible="draft,submitted,approved,rejected,done"/>
+                        </header>
+                        <group>
+                            <group string="Request Info">
+                                <field name="name"/>
+                                <field name="request_date"/>
+                                <field name="product_id"/>
+                                <field name="department_id"/>
+                                <field name="requested_by_id" readonly="1"/>
+                                <field name="quantity"/>
+                            </group>
+                            <group string="Product Snapshot">
+                                <field name="product_co2e_per_unit" readonly="1"/>
+                                <field name="product_cost_per_unit" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Impact Metrics" col="3">
+                            <field name="co2e_avoided" readonly="1"/>
+                            <field name="aed_saved" readonly="1"/>
+                            <field name="ceits_awarded" readonly="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Internal Notes">
+                                <field name="reason" nolabel="1"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_csr_upcycle_request_kanban" model="ir.ui.view">
+            <field name="name">csr.upcycle.request.kanban</field>
+            <field name="model">csr.upcycle.request</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_small_column" default_group_by="state" create="true">
+                    <field name="name"/>
+                    <field name="state"/>
+                    <field name="product_id"/>
+                    <field name="department_id"/>
+                    <field name="quantity"/>
+                    <field name="co2e_avoided"/>
+                    <field name="aed_saved"/>
+                    <field name="ceits_awarded"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_primary_bottom d-flex justify-content-between align-items-center">
+                                    <strong t-esc="record.name.value"/>
+                                    <t t-set="state_class" t-value="'bg-secondary'"/>
+                                    <t t-if="record.state.raw_value == 'submitted'" t-set="state_class" t-value="'bg-info'"/>
+                                    <t t-if="record.state.raw_value == 'approved'" t-set="state_class" t-value="'bg-success'"/>
+                                    <t t-if="record.state.raw_value == 'rejected'" t-set="state_class" t-value="'bg-danger'"/>
+                                    <t t-if="record.state.raw_value == 'done'" t-set="state_class" t-value="'bg-primary text-white'"/>
+                                    <span class="badge" t-att-class="state_class" t-esc="record.state.value"/>
+                                </div>
+                                <div class="mt-2">
+                                    <span t-esc="record.product_id.value"/>
+                                    <span class="text-muted"> · </span>
+                                    <span t-esc="record.department_id.value"/>
+                                </div>
+                                <div class="mt-1">
+                                    <span class="text-muted">Qty:</span>
+                                    <span t-esc="record.quantity.value"/>
+                                </div>
+                                <div class="mt-2 fw-bold text-success">
+                                    <i class="fa fa-leaf me-1" title="Eco Impact"/>
+                                    <span t-esc="record.co2e_avoided.value"/> kg CO₂e
+                                </div>
+                                <div class="text-info fw-bold">
+                                    <i class="fa fa-coins me-1" title="Saved Value"/>
+                                    <span t-esc="record.aed_saved.value"/> AED
+                                </div>
+                                <div class="mt-1 text-primary">
+                                    <i class="fa fa-star me-1" title="CEITs Awarded"/>
+                                    <span t-esc="record.ceits_awarded.value"/> CEITS
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_csr_upcycle_request_search" model="ir.ui.view">
+            <field name="name">csr.upcycle.request.search</field>
+            <field name="model">csr.upcycle.request</field>
+            <field name="arch" type="xml">
+                <search string="Upcycle Requests">
+                    <field name="name"/>
+                    <field name="product_id"/>
+                    <field name="department_id"/>
+                    <field name="requested_by_id"/>
+                    <filter name="filter_state_draft" string="Draft" domain="[('state', '=', 'draft')]"/>
+                    <filter name="filter_state_submitted" string="Submitted" domain="[('state', '=', 'submitted')]"/>
+                    <filter name="filter_state_approved" string="Approved" domain="[('state', '=', 'approved')]"/>
+                    <filter name="filter_state_done" string="Done" domain="[('state', '=', 'done')]"/>
+                    <filter name="filter_state_rejected" string="Rejected" domain="[('state', '=', 'rejected')]"/>
+                    <group>
+                        <filter name="group_by_department" string="Department" context="{'group_by': 'department_id'}"/>
+                        <filter name="group_by_product" string="Product" context="{'group_by': 'product_id'}"/>
+                        <filter name="group_by_state" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="group_by_request_date" string="Request Month"
+                                context="{'group_by': 'request_date:month'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_csr_upcycle_request_graph" model="ir.ui.view">
+            <field name="name">csr.upcycle.request.graph</field>
+            <field name="model">csr.upcycle.request</field>
+            <field name="arch" type="xml">
+                <graph type="bar" string="Upcycle Impact">
+                    <field name="co2e_avoided" type="measure"/>
+                    <field name="aed_saved" type="measure"/>
+                    <field name="ceits_awarded" type="measure"/>
+                    <field name="state" type="row"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_csr_upcycle_request_pivot" model="ir.ui.view">
+            <field name="name">csr.upcycle.request.pivot</field>
+            <field name="model">csr.upcycle.request</field>
+            <field name="arch" type="xml">
+                <pivot string="Upcycle Impact Pivot">
+                    <field name="co2e_avoided" type="measure"/>
+                    <field name="aed_saved" type="measure"/>
+                    <field name="ceits_awarded" type="measure"/>
+                    <field name="department_id" type="row"/>
+                    <field name="product_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+    </data>
+</odoo>
